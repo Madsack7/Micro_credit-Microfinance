@@ -1,0 +1,99 @@
+create table personnel(id_personnel int auto_increment primary key,
+			prenom char(50),
+			nom char(50),
+			telephone char(20) unique,
+			fonction char(20),
+			date_embauche date default current_date,
+			pseudo char(30) unique,
+			mot_de_passe char(30),
+			photo char(100)
+			);
+
+create table portefeuille(id_portefeuille int auto_increment primary key,
+			 montant_financer int,
+			 personnel int,
+			 date_creation date default current_date,
+			 foreign key (personnel) references personnel(id_personnel)
+			 );
+create table clientnonvalide (idclient int auto_increment primary key,
+    		     		prenom char(50),
+		     		nom char(50),
+		     		adresse char(30),
+		     		telephone char(20) unique,
+				activite char(50),
+		     		situation_matri char(20),
+		     		date_naissance date,
+		     		piece_identite char(30),
+		     		sexe char(10),
+		     		photo char(30),
+				date_creation date  default current_date
+		     		);
+
+
+create table client (idclient int auto_increment primary key,
+    		     prenom char(50),
+		     nom char(50),
+		     adresse char(30),
+		     telephone char(20) unique,
+		     activite char(50),
+		     situation_matri char(20),
+		     date_naissance date ,
+		     piece_identite char(30),
+		     sexe char(10),
+		     photo char(100),
+		     date_creation date  default current_date,
+		     portefeuille int,
+		     foreign key(portefeuille) references portefeuille(id_portefeuille)
+		     );
+
+create table credit(id_credit int auto_increment primary key,
+		montant_credit int,
+		montant_paye int,
+		montant_reste int,
+		periode_remboursement int,
+		montant_remboursement int,
+		date_echeance date,
+		date_approbation date default current_date,
+		etat char(15),
+		client int,
+		portefeuille int,
+		personnel int,
+		foreign key(client) references client(idclient),
+		foreign key(portefeuille) references portefeuille(id_portefeuille),
+		foreign key(personnel) references personnel(id_personnel)
+		);
+
+
+create table compte_courant(id_comptecourant int auto_increment primary key,
+			    solde int,
+			    client int,
+			    foreign key(client) references client(idclient)
+			    );
+
+create table compte_credit(id_comptecredit int auto_increment primary key,
+			    solde int,
+			    client int,
+			    foreign key(client) references client(idclient)
+			    );
+
+create table compte_epargne(id_compteepargne int auto_increment primary key,
+			    solde int,
+			    client int,
+			    foreign key(client) references client(idclient)
+			    );
+create table doleance(id_doleance int auto_increment primary key,
+			description char(255),
+			clientnonvalide int,
+			foreign key(clientnonvalide) references clientnonvalide(idclient)
+		    );
+create table transaction(id_transaction int auto_increment primary key,
+			type_transaction char(20),
+			type_compte char(20),
+			date_transaction date default current_date,
+			montant int,
+			client int,
+			personnel int,
+			foreign key(client) references client(idclient),
+			foreign key(personnel) references personnel(id_personnel)
+			);
+			

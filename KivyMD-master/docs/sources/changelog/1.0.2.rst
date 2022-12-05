@@ -1,0 +1,13 @@
+1.0.2
+------
+
+    See on GitHub: `tag 1.0.2 <https://github.com/kivymd/KivyMD/tree/1.0.2>`_ | `compare 1.0.1/1.0.2 <https://github.com/kivymd/KivyMD/compare/1.0.1...1.0.2>`_
+
+    .. code-block:: bash
+
+       pip install kivymd==1.0.2
+
+* Bug fixes and other minor improvements.
+* Added a button to copy the code to the documentation.
+* Added the feature to view code examples of documentation in imperative and declarative styles.
+* Added console scripts for developer tools.
